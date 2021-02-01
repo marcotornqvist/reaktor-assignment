@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import ProductItem from "./productItem";
 import Spinner from "./spinner";
@@ -105,48 +105,50 @@ const Products = () => {
   }, [data, makers]);
 
   return (
-    <Fragment>
-      <table className="products">
-        <thead>
-          <tr>
-            <th>
-              <span>Product Name</span>
-            </th>
-            <th>
-              <span>Manufacturer</span>
-            </th>
-            <th>
-              <span>Price</span>
-            </th>
-            <th>
-              <span>Status</span>
-            </th>
-            <th>
-              <span>Colors</span>
-            </th>
-            <th>
-              <span>Product no.</span>
-            </th>
-          </tr>
-        </thead>
-        {/* If loading is set to false render "ProductItem"'s */}
-        {!loading && (
-          <tbody>
-            {merged
-              ? // loops through all the products & manufacturers
-                merged.map((item, index) => (
-                  <ProductItem item={item} merged={true} key={index} />
-                ))
-              : // loops through all the products
-                data?.map((item, index) => (
-                  <ProductItem item={item} merged={false} key={index} />
-                ))}
-          </tbody>
-        )}
-      </table>
+    <div className="table-wrapper">
+      <div className={`table-scroll${loading ? " remove-borders" : ""}`}>
+        <table>
+          <thead>
+            <tr>
+              <th>
+                <span>Product Name</span>
+              </th>
+              <th>
+                <span>Manufacturer</span>
+              </th>
+              <th>
+                <span>Price</span>
+              </th>
+              <th>
+                <span>Status</span>
+              </th>
+              <th>
+                <span>Colors</span>
+              </th>
+              <th>
+                <span>Product no.</span>
+              </th>
+            </tr>
+          </thead>
+          {/* If loading is set to false render "ProductItem"'s */}
+          {!loading && (
+            <tbody>
+              {merged
+                ? // loops through all the products & manufacturers
+                  merged.map((item, index) => (
+                    <ProductItem item={item} merged={true} key={index} />
+                  ))
+                : // loops through all the products
+                  data?.map((item, index) => (
+                    <ProductItem item={item} merged={false} key={index} />
+                  ))}
+            </tbody>
+          )}
+        </table>
+      </div>
       {/* Renders a spinner component */}
       {loading && <Spinner />}
-    </Fragment>
+    </div>
   );
 };
 

@@ -1,5 +1,5 @@
 .categories {
-  padding: 2rem 0;
+  padding-top: 2rem;
 
   .selectors {
     display: flex;
@@ -38,149 +38,161 @@
     }
   }
 
-  .dashboard {
-    min-width: 100%;
-    overflow-x: scroll;
-    border-radius: 3px;
-    background: $white;
-    box-shadow: $box-shadow1;
+  .table-wrapper {
+    height: 65vh;
 
-    table {
-      border-collapse: collapse;
-      width: 100%;
+    .table-scroll {
+      max-height: 100%;
+      overflow: scroll;
+      background: $white;
+      box-shadow: $box-shadow1;
+      border-radius: 3px;
 
-      thead {
-        background: $black;
+      &.remove-borders {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
 
-        tr th {
-          height: 3.5rem;
-          padding: 1rem 1.5rem;
-          border: none;
-          text-align: start;
-          white-space: nowrap;
+      table {
+        border-collapse: collapse;
+        width: 100%;
 
-          span {
-            font-size: 14px;
-            font-weight: 700;
-            color: $white;
+        thead {
+          background: $black;
+
+          tr th {
+            background: $black;
+            height: 3.5rem;
+            padding: 1rem 1.5rem;
+            border: none;
+            text-align: start;
+            white-space: nowrap;
+
+            span {
+              font-size: 14px;
+              font-weight: 700;
+              color: $white;
+            }
+          }
+
+          tr th:first-child {
+            text-align: start;
           }
         }
 
-        tr th:first-child {
-          text-align: start;
-        }
-      }
-
-      tbody {
-        position: relative;
-
-        tr {
-          height: 3.5rem;
-          border-bottom: 1px solid $lightgrey;
-
-          td {
-            letter-spacing: initial;
-            border-right: 1px solid $lightgrey;
-            padding: 1rem 1.5rem;
-
-            span {
-              font-size: 12px;
-              font-weight: 400;
-              color: $black;
-            }
+        tbody {
+          tr {
+            height: 3.5rem;
+            border-bottom: 1px solid $lightgrey;
 
             &:last-child {
               border: none;
             }
-          }
 
-          .product-name span {
-            font-weight: 500;
-          }
+            td {
+              letter-spacing: initial;
+              border-right: 1px solid $lightgrey;
+              padding: 1rem 1.5rem;
 
-          .stock span {
-            white-space: nowrap;
-            font-weight: 400;
-            color: $grey;
+              span {
+                font-size: 12px;
+                font-weight: 400;
+                color: $black;
+              }
 
-            &.green,
-            &.yellow,
-            &.red {
+              &:last-child {
+                border: none;
+              }
+            }
+
+            .product-name span {
               font-weight: 500;
             }
 
-            &.green {
-              color: $green;
-            }
+            .stock span {
+              white-space: nowrap;
+              font-weight: 400;
+              color: $grey;
 
-            &.yellow {
-              color: $yellow;
-            }
-
-            &.red {
-              color: $red;
-            }
-          }
-
-          .colors .color {
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-
-            .color-circle {
-              background: $black;
-              width: 0.5rem;
-              height: 0.5rem;
-              border-radius: 50%;
-              margin-right: 0.5rem;
-
-              &.white {
-                border: 1px solid $grey;
-                background: $white;
-                width: 9px;
-                height: 9px;
-              }
-
-              &.grey {
-                background: $grey;
+              &.green,
+              &.yellow,
+              &.red {
+                font-weight: 500;
               }
 
               &.green {
-                background: $green;
+                color: $green;
               }
 
               &.yellow {
-                background: $yellow;
+                color: $yellow;
               }
 
               &.red {
-                background: $red;
-              }
-
-              &.blue {
-                background: $blue;
-              }
-
-              &.purple {
-                background: $purple;
+                color: $red;
               }
             }
 
-            span {
-              font-weight: 500;
+            .colors .color {
+              margin-bottom: 0.5rem;
+              display: flex;
+              align-items: center;
+
+              .color-circle {
+                background: $black;
+                width: 0.5rem;
+                height: 0.5rem;
+                border-radius: 50%;
+                margin-right: 0.5rem;
+
+                &.white {
+                  border: 1px solid $grey;
+                  background: $white;
+                  width: 9px;
+                  height: 9px;
+                }
+
+                &.grey {
+                  background: $grey;
+                }
+
+                &.green {
+                  background: $green;
+                }
+
+                &.yellow {
+                  background: $yellow;
+                }
+
+                &.red {
+                  background: $red;
+                }
+
+                &.blue {
+                  background: $blue;
+                }
+
+                &.purple {
+                  background: $purple;
+                }
+              }
+
+              span {
+                font-weight: 500;
+              }
             }
-          }
 
-          .color:last-child {
-            margin: 0;
-          }
+            .color:last-child {
+              margin: 0;
+            }
 
-          .product-number {
-            padding-right: 1rem;
-            border-right: none;
+            .product-number {
+              padding-right: 1rem;
+              border-right: none;
 
-            span {
-              color: $grey;
+              span {
+                color: $grey;
+              }
             }
           }
         }
@@ -191,15 +203,18 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 400px;
+      height: 100%;
       width: 100%;
+      background: $white;
+      border-bottom-left-radius: 3px;
+      border-bottom-right-radius: 3px;
     }
   }
 }
 
 @media only screen and (min-width: $breakpoint-md) {
   .categories {
-    padding: 4rem 0;
+    padding-top: 3rem;
 
     .selectors {
       flex-direction: row;
@@ -226,7 +241,17 @@
             color: $white;
           }
         }
+
+        &:last-child {
+          margin: 0;
+        }
       }
     }
+  }
+}
+
+@media only screen and (min-height: 700px) {
+  .categories .container .table-wrapper {
+    height: 70vh;
   }
 }
