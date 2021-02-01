@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import ProductItem from "./productItem";
 import Spinner from "./spinner";
@@ -19,7 +19,7 @@ const Products = () => {
   useEffect(() => {
     const { category } = router.query;
     setLoading(true);
-    // Request that returns products by category
+    // Requests that returns products by category
     const fetchData = async () => {
       const result = await axios.get(
         `https://cors-anywhere.herokuapp.com/https://bad-api-assignment.reaktor.com/v2/products/${category}`
@@ -105,9 +105,9 @@ const Products = () => {
   }, [data, makers]);
 
   return (
-    <Fragment>
-      <div className={`dashboard${loading ? " remove-borders" : ""}`}>
-        <table className="products">
+    <div className="table-wrapper">
+      <div className={`table-scroll${loading ? " remove-borders" : ""}`}>
+        <table>
           <thead>
             <tr>
               <th>
@@ -148,7 +148,7 @@ const Products = () => {
       </div>
       {/* Renders a spinner component */}
       {loading && <Spinner />}
-    </Fragment>
+    </div>
   );
 };
 
