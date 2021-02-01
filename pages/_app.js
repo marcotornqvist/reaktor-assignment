@@ -1,7 +1,18 @@
-import '../styles/globals.css'
+import { Fragment } from "react";
+import Head from "next/head";
+import "./app.scss";
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
-}
+const App = ({ Component, pageProps }) => {
+  return (
+    <Fragment>
+      <Head>
+        <title>Reaktor Assignment</title>
+      </Head>
+      <div className="main">
+        <Component {...pageProps} />
+      </div>
+    </Fragment>
+  );
+};
 
-export default MyApp
+export default App;
