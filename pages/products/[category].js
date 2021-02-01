@@ -7,9 +7,7 @@ const Categories = () => {
     <div className="categories">
       <div className="container">
         <Selectors />
-        <div className="dashboard">
-          <Products />
-        </div>
+        <Products />
       </div>
     </div>
   );

@@ -40,10 +40,15 @@
 
   .dashboard {
     min-width: 100%;
-    overflow-x: scroll;
+    overflow: scroll;
     border-radius: 3px;
     background: $white;
     box-shadow: $box-shadow1;
+
+    &.remove-borders {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
 
     table {
       border-collapse: collapse;
@@ -53,6 +58,7 @@
         background: $black;
 
         tr th {
+          background: $black;
           height: 3.5rem;
           padding: 1rem 1.5rem;
           border: none;
@@ -72,11 +78,13 @@
       }
 
       tbody {
-        position: relative;
-
         tr {
           height: 3.5rem;
           border-bottom: 1px solid $lightgrey;
+
+          &:last-child {
+            border: none;
+          }
 
           td {
             letter-spacing: initial;
@@ -186,20 +194,23 @@
         }
       }
     }
+  }
 
-    .spinner {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 400px;
-      width: 100%;
-    }
+  .spinner {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background: $white;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
   }
 }
 
 @media only screen and (min-width: $breakpoint-md) {
   .categories {
-    padding: 4rem 0;
+    padding: 3rem 0;
 
     .selectors {
       flex-direction: row;
@@ -226,7 +237,15 @@
             color: $white;
           }
         }
+
+        &:last-child {
+          margin: 0;
+        }
       }
     }
+  }
+
+  .dashboard {
+    max-height: 616px;
   }
 }

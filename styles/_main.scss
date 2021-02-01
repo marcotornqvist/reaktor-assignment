@@ -44,11 +44,6 @@ html,
   background: $lightgrey;
 }
 
-// Prevent scroll hook under 768px
-.body-prevent-scroll {
-  overflow: hidden;
-}
-
 #__next {
   display: flex;
   flex-direction: column;
@@ -67,16 +62,9 @@ a {
   text-decoration: none;
 }
 
-input[type="text"],
-input[type="number"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
 .container {
   padding: 0 1rem;
-  height: 100%;
+  min-height: 100%;
   margin: 0 auto;
 }
 

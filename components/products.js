@@ -19,7 +19,7 @@ const Products = () => {
   useEffect(() => {
     const { category } = router.query;
     setLoading(true);
-    // Requests that returns products by category
+    // Request that returns products by category
     const fetchData = async () => {
       const result = await axios.get(
         `https://cors-anywhere.herokuapp.com/https://bad-api-assignment.reaktor.com/v2/products/${category}`
@@ -106,44 +106,46 @@ const Products = () => {
 
   return (
     <Fragment>
-      <table className="products">
-        <thead>
-          <tr>
-            <th>
-              <span>Product Name</span>
-            </th>
-            <th>
-              <span>Manufacturer</span>
-            </th>
-            <th>
-              <span>Price</span>
-            </th>
-            <th>
-              <span>Status</span>
-            </th>
-            <th>
-              <span>Colors</span>
-            </th>
-            <th>
-              <span>Product no.</span>
-            </th>
-          </tr>
-        </thead>
-        {/* If loading is set to false render "ProductItem"'s */}
-        {!loading && (
-          <tbody>
-            {merged
-              ? // loops through all the products & manufacturers
-                merged.map((item, index) => (
-                  <ProductItem item={item} merged={true} key={index} />
-                ))
-              : // loops through all the products
-                data?.map((item, index) => (
-                  <ProductItem item={item} merged={false} key={index} />
-                ))}
-          </tbody>
-        )}
-      </table>
+      <div className={`dashboard${loading ? " remove-borders" : ""}`}>
+        <table className="products">
+          <thead>
+            <tr>
+              <th>
+                <span>Product Name</span>
+              </th>
+              <th>
+                <span>Manufacturer</span>
+              </th>
+              <th>
+                <span>Price</span>
+              </th>
+              <th>
+                <span>Status</span>
+              </th>
+              <th>
+                <span>Colors</span>
+              </th>
+              <th>
+                <span>Product no.</span>
+              </th>
+            </tr>
+          </thead>
+          {/* If loading is set to false render "ProductItem"'s */}
+          {!loading && (
+            <tbody>
+              {merged
+                ? // loops through all the products & manufacturers
+                  merged.map((item, index) => (
+                    <ProductItem item={item} merged={true} key={index} />
+                  ))
+                : // loops through all the products
+                  data?.map((item, index) => (
+                    <ProductItem item={item} merged={false} key={index} />
+                  ))}
+            </tbody>
+          )}
+        </table>
+      </div>
       {/* Renders a spinner component */}
       {loading && <Spinner />}
     </Fragment>
