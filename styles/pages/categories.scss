@@ -11,7 +11,7 @@
       text-transform: uppercase;
       font-size: 2rem;
       color: $black;
-      font-weight: 600;
+      font-weight: 700;
     }
 
     .wrapper button {
@@ -35,14 +35,6 @@
       &:last-child {
         margin: 0;
       }
-
-      &:hover {
-        background: $black;
-
-        a {
-          color: $white;
-        }
-      }
     }
   }
 
@@ -65,10 +57,11 @@
           padding: 1rem 1.5rem;
           border: none;
           text-align: start;
+          white-space: nowrap;
 
           span {
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 700;
             color: $white;
           }
         }
@@ -223,6 +216,15 @@
 
         a {
           font-size: 14px;
+        }
+
+        &:hover {
+          background: $black;
+          border: 1px solid $black;
+
+          a {
+            color: $white;
+          }
         }
       }
     }
