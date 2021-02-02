@@ -1,0 +1,35 @@
+.error {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      color: $red;
+    }
+
+    button {
+      height: 3rem;
+      min-width: 200px;
+      padding: 0 1rem;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      background: $white;
+      outline: none;
+
+      a {
+        font-weight: 500;
+        font-size: 12px;
+        color: $black;
+      }
+    }
+  }
+}
