@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import ProductItem from "./productItem";
 import Spinner from "./spinner";
+import Error from "./error";
 import axios from "axios";
 
 // const headers = {
@@ -10,25 +11,35 @@ import axios from "axios";
 
 const Products = () => {
   const router = useRouter();
+  const { category } = router.query;
   const [data, setData] = useState();
   const [names, setNames] = useState();
   const [makers, setMakers] = useState();
   const [merged, setMerged] = useState();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState();
 
   useEffect(() => {
-    const { category } = router.query;
+    setError();
     setLoading(true);
-    // Requests that returns products by category
     const fetchData = async () => {
-      const result = await axios.get(
-        `https://cors-anywhere.herokuapp.com/https://bad-api-assignment.reaktor.com/v2/products/${category}`
-        // { headers: headers }
-      );
+      try {
+        // Requests that returns products by category
+        const result = await axios.get(
+          `https://secret-scrubland-05462.herokuapp.com/https://bad-api-assignment.reaktor.com/v2/products/${category}`
+          // {
+          //   headers: headers,
+          // }
+        );
 
-      // Sets the response
-      setData(result.data);
-      setLoading(false);
+        // Sets the response
+        setData(result.data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error.response);
+        setError(error.response);
+        setLoading(false);
+      }
     };
 
     if (
@@ -37,8 +48,11 @@ const Products = () => {
       category === "beanies"
     ) {
       fetchData();
+    } else {
+      // Redirets to /products/beanies if route is something else than gloves, facemasks or beanies
+      router.push("/products/beanies");
     }
-  }, [router.query.category]); // Request based on
+  }, [category]);
 
   // Sets the initial makers(manufacturers)
   // If we don't set the initial makers and instead
@@ -68,22 +82,28 @@ const Products = () => {
       for (let i = 0; i < names.length; i++) {
         requests.push(
           axios.get(
-            `https://cors-anywhere.herokuapp.com/https://bad-api-assignment.reaktor.com/v2/availability/${names[i]}`
+            `https://secret-scrubland-05462.herokuapp.com/https://bad-api-assignment.reaktor.com/v2/availability/${names[i]}`
           )
         );
       }
 
       // Axios .all makes it possible for us to request in pararrel from different recourses
-      axios.all(requests).then(
-        axios.spread((...args) => {
-          const results = [];
-          args.forEach((item) => {
-            results.push(...item.data.response);
-          });
+      axios
+        .all(requests)
+        .then(
+          axios.spread((...args) => {
+            const results = [];
+            args.forEach((item) => {
+              results.push(...item.data.response);
+            });
 
-          setMakers(results);
-        })
-      );
+            setMakers(results);
+          })
+        )
+        .catch((error) => {
+          console.log(error.response);
+          setError(error.response);
+        });
     }
   }, [names]);
 
@@ -130,24 +150,28 @@ const Products = () => {
               </th>
             </tr>
           </thead>
-          {/* If loading is set to false render "ProductItem"'s */}
-          {!loading && (
+          {/* If no errors and not loading continue */}
+          {!error && !loading && (
             <tbody>
+              {/* If items are merged return merged items either return just the products */}
               {merged
                 ? // loops through all the products & manufacturers
                   merged.map((item, index) => (
                     <ProductItem item={item} merged={true} key={index} />
                   ))
                 : // loops through all the products
-                  data?.map((item, index) => (
+                  data &&
+                  data.map((item, index) => (
                     <ProductItem item={item} merged={false} key={index} />
                   ))}
             </tbody>
           )}
         </table>
       </div>
-      {/* Renders a spinner component */}
-      {loading && <Spinner />}
+      {/* Renders error component if there are errors */}
+      {error && <Error error={error} />}
+      {/* Renders a spinner component if data is loading & no errors*/}
+      {!error && loading && <Spinner />}
     </div>
   );
 };

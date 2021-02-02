@@ -3,6 +3,7 @@
 > My Reaktor Assignment for summer internship position.
 
 Demo link [https://reaktor-assignment.marcotornqvist.vercel.app](https://reaktor-assignment.marcotornqvist.vercel.app)
+The demo might crash when you initially load it, because heroku cors-proxy is in sandbox mode which means that the heroku dyno might be sleeping. Wait for 30 seconds and refresh the page and it should work.
 
 ### Usage
 
